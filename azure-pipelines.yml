@@ -20,15 +20,15 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(build.artifactstagingdirectory'
+    Contents: '**/war*'
+    TargetFolder: '$(build.artifactstagingdirectory'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Warfile'
+    publishLocation: 'Container'
 
-    -task: CopyFiles@2
-     input: 
-      Contents: '**/*war'
-      TarhetFolder: $(build.artifactstagingdirectory)
-
-
-    - task: PublishBuildArtifacts
-      input: 
-       PathtoPublsih: $(build.artifactstagingdirectory)
-       ArtifactName: 'Warfile'
-       BuildLocation: 'AzurePipelines'
+    
